@@ -1,5 +1,6 @@
 package com.rabbitmq.rr.producer_basic.controller;
 
+import com.rabbitmq.rr.producer_basic.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -23,6 +24,16 @@ public class ExchangeController {
                                         @PathVariable String routingKey,
                                         @RequestBody String message) {
         logger.info("Sending message {}", message);
+        rabbitTemplate.convertAndSend(exchange, routingKey, message);
+        return ResponseEntity.ok().build();
+    }
+
+
+    @PostMapping("json/{exchange}/{routingKey}")
+    public HttpEntity<?> postJsonOnExchange(@PathVariable String exchange,
+                                            @PathVariable String routingKey,
+                                            @RequestBody Person message) {
+        logger.info("sending message: {}", message);
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
         return ResponseEntity.ok().build();
     }

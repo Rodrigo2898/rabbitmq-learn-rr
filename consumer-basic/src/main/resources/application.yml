@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: consumer-basic
+  rabbitmq:
+    password: guest
+    username: guest
+server:
+  port: 8081
