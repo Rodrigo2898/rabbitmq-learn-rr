@@ -17,7 +17,7 @@ public class FanoutConfig {
     @Bean
     public Exchange fanoutExchange() {
         return ExchangeBuilder
-                .directExchange("FANOUT-EXCHANGE-BASIC")
+                .fanoutExchange("FANOUT-EXCHANGE-BASIC")
                 .durable(true)
                 .build();
     }

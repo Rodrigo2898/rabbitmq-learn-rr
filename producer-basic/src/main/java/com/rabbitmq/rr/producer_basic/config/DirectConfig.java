@@ -28,7 +28,7 @@ public class DirectConfig {
         return BindingBuilder
                 .bind(firstQueue)
                 .to(directExchange())
-                .with("TO-FIST-QUEUE")
+                .with("TO-FIRST-QUEUE")
                 .noargs();
     }
 
