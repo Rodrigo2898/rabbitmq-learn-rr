@@ -22,6 +22,7 @@ public class RabbitMQConfig {
         var rabbitAdmin = new RabbitAdmin(connectionFactory);
         createExchange(rabbitAdmin);
         createFirstQueue(rabbitAdmin);
+        createSecondQueue(rabbitAdmin);
     }
 
     private void createExchange(RabbitAdmin rabbitAdmin) {
@@ -46,4 +47,25 @@ public class RabbitMQConfig {
         rabbitAdmin.declareQueue(queue);
         rabbitAdmin.declareBinding(binding);
     }
+
+    private void createSecondQueue(RabbitAdmin rabbitAdmin) {
+        var queue = QueueBuilder
+                .durable(QueueDefinition.SECOND_QUEUE.getValue())
+                .maxLength(10)
+                .ttl(30_000)
+                .deadLetterExchange(QueueDefinition.DLQ_EXCHANGE.getValue())
+                .deadLetterRoutingKey(QueueDefinition.DLQ_BINDING_KEY.getValue())
+                .build();
+        var biding = new Binding(
+                QueueDefinition.SECOND_QUEUE.getValue(),
+                Binding.DestinationType.QUEUE,
+                QueueDefinition.DIRECT_EXCHANGE.getValue(),
+                QueueDefinition.SECOND_BINDING_KEY.getValue(),
+                null
+        );
+        rabbitAdmin.declareQueue(queue);
+        rabbitAdmin.declareBinding(biding);
+    }
+
+    
 }
