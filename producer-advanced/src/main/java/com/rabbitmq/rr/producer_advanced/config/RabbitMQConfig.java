@@ -23,6 +23,7 @@ public class RabbitMQConfig {
         createExchange(rabbitAdmin);
         createFirstQueue(rabbitAdmin);
         createSecondQueue(rabbitAdmin);
+        createDLQ(rabbitAdmin);
     }
 
     private void createExchange(RabbitAdmin rabbitAdmin) {
@@ -67,5 +68,23 @@ public class RabbitMQConfig {
         rabbitAdmin.declareBinding(biding);
     }
 
-    
+    public void createDLQ(RabbitAdmin rabbitAdmin) {
+        var queue = QueueBuilder
+                .durable(QueueDefinition.DLQ_QUEUE.getValue())
+                .build();
+        var exchange = ExchangeBuilder
+                .directExchange(QueueDefinition.DLQ_EXCHANGE.getValue())
+                .durable(true)
+                .build();
+        var binding = new Binding(
+                QueueDefinition.DLQ_QUEUE.getValue(),
+                Binding.DestinationType.QUEUE,
+                QueueDefinition.DLQ_EXCHANGE.getValue(),
+                QueueDefinition.DLQ_BINDING_KEY.getValue(),
+                null
+        );
+        rabbitAdmin.declareQueue(queue);
+        rabbitAdmin.declareExchange(exchange);
+        rabbitAdmin.declareBinding(binding);
+    }
 }
