@@ -10,6 +10,7 @@
         <module name="producer-advanced" />
         <module name="producer-basic" />
         <module name="consumer-advanced" />
+        <module name="producer-advanced-multiple-vhost" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="consumer-advanced" options="-parameters" />
       <module name="consumer-basic" options="-parameters" />
       <module name="producer-advanced" options="-parameters" />
+      <module name="producer-advanced-multiple-vhost" options="-parameters" />
       <module name="producer-basic" options="-parameters" />
     </option>
   </component>

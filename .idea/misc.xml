@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/producer-basic/pom.xml" />
         <option value="$PROJECT_DIR$/producer-advanced/pom.xml" />
         <option value="$PROJECT_DIR$/consumer-advanced/pom.xml" />
+        <option value="$PROJECT_DIR$/producer-advanced-multiple-vhost/pom.xml" />
       </list>
     </option>
   </component>

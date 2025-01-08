@@ -17,7 +17,7 @@ public class AskListener {
 
     private final Logger logger = LoggerFactory.getLogger(AskListener.class);
 
-    @RabbitListener(queues = "FIRST-QUEUE-ADVANCED", ackMode = "MANUAL")
+    @RabbitListener(queues = "FIRST-QUEUE-ADVANCED", ackMode = "MANUAL", concurrency = "5-6")
     public void askListener(Message<Person> message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) Long tag) throws IOException {
         logger.info("Received Message: {}", message);
         if (message.getPayload().collageCompletedYear() == null) {
